@@ -10,24 +10,31 @@ namespace AI
 
         public float frequency = 0.1f;
 
+        public Dictionary<AIState, State> stateList = new Dictionary<AIState, State>();
+
         private void Awake()
         {
             GameController.Instance.fsm = this;
         }
 
-        private void Start()
+        public void StartFSM()
         {
             StartCoroutine(Loop());
         }
 
-        public void ChangeState(State newState)
+        public void AddState(State newState)
+        {
+            stateList.Add(newState.type,newState);
+        }
+
+        public void ChangeState(AIState type)
         {
             if(CurrentState != null)
             {
                 CurrentState.Exit();
             }
 
-            CurrentState = newState;
+            CurrentState = stateList[type];
             CurrentState.Enter();
         }
 

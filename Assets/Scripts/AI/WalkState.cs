@@ -6,6 +6,8 @@ namespace AI
 {
     public class WalkState : State
     {
+        public WalkState(AgentContainer agent) : base(agent) { }
+
         public override AIState type => AIState.Walk;
 
         public float Speed;

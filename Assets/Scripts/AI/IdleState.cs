@@ -6,6 +6,8 @@ namespace AI
 {
     public class IdleState : State
     {
+        public IdleState(AgentContainer agent) : base(agent) { }
+
         public override AIState type { get => AIState.Idle; }
 
         public override void Enter()

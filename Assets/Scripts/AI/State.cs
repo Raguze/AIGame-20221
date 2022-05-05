@@ -15,11 +15,13 @@ namespace AI
 
     public abstract class State
     {
+        public AgentContainer Agent { get; protected set; }
+
         public virtual AIState type { get; }
 
-        public State()
+        public State(AgentContainer agent)
         {
-
+            Agent = agent;
         }
 
         public virtual void Enter()
