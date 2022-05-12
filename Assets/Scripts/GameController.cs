@@ -12,6 +12,11 @@ public class GameController : MonoBehaviour
 
     public PlayerController player;
 
+    public Checkpoint startPoint;
+    public Checkpoint endPoint;
+    public Checkpoint redBase;
+    public Checkpoint redFlag;
+
     private void Awake()
     {
         Instance = this;
@@ -20,17 +25,31 @@ public class GameController : MonoBehaviour
 
         checkpoints.AddRange(FindObjectsOfType<Checkpoint>());
 
-        Checkpoint start = checkpoints.Find((c) => 
+        startPoint = checkpoints.Find((c) => 
         {
             return c.type == CheckpointType.Start;
         });
 
+        endPoint = checkpoints.Find((c) =>
+        {
+            return c.type == CheckpointType.End;
+        });
+
+        redBase = checkpoints.Find((c) =>
+        {
+            return c.type == CheckpointType.RedBase;
+        });
+
+        redFlag = checkpoints.Find((c) =>
+        {
+            return c.type == CheckpointType.RedFlag;
+        });
 
         float playerY = player.transform.position.y;
         player.transform.position = new Vector3(
-            start.transform.position.x,
+            redBase.transform.position.x,
             playerY,
-            start.transform.position.z
+            redBase.transform.position.z
         );
     }
 
@@ -40,4 +59,5 @@ public class GameController : MonoBehaviour
     {
         
     }
+
 }

@@ -14,17 +14,17 @@ namespace AI
 
         public override void Enter()
         {
-            base.Enter();
+            
         }
 
         public override void Exit()
         {
-            base.Exit();
+            
         }
 
-        public override void Update()
+        public override void Update(float deltaTime)
         {
-            base.Update();
+            
         }
     }
 

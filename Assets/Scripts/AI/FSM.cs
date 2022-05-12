@@ -12,6 +12,10 @@ namespace AI
 
         public Dictionary<AIState, State> stateList = new Dictionary<AIState, State>();
 
+        private float currentTime;
+        private float lastTime;
+        private float deltaTime;
+
         private void Awake()
         {
             GameController.Instance.fsm = this;
@@ -19,6 +23,7 @@ namespace AI
 
         public void StartFSM()
         {
+            currentTime = lastTime = Time.realtimeSinceStartup;
             StartCoroutine(Loop());
         }
 
@@ -42,11 +47,14 @@ namespace AI
         {
             while(true)
             {
+                currentTime = Time.realtimeSinceStartup;
+                deltaTime = currentTime - lastTime;
                 if (CurrentState != null)
                 {
-                    CurrentState.Update();
+                    CurrentState.Update(deltaTime);
                 }
                 yield return new WaitForSeconds(frequency);
+                lastTime = currentTime;
             }
         }
 

@@ -11,6 +11,8 @@ namespace AI
         None,
         Idle,
         Walk,
+        Chase,
+        Return
     }
 
     public abstract class State
@@ -24,20 +26,12 @@ namespace AI
             Agent = agent;
         }
 
-        public virtual void Enter()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Enter();
 
-        public virtual void Exit()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Exit();
 
-        public virtual void Update()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Update(float deltaTime);
+
     }
 
 }

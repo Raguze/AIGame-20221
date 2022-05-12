@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum CheckpointType
 {
-    None, Start, End
+    None, Start, End, RedFlag, RedBase, BlueFlag, BlueBase
 }
 
 public class Checkpoint : MonoBehaviour

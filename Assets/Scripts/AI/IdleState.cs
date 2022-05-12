@@ -10,19 +10,35 @@ namespace AI
 
         public override AIState type { get => AIState.Idle; }
 
+        private float waitSeconds;
+        private bool isWaiting;
+
+        IEnumerator LoopWait()
+        {
+            yield return new WaitForSeconds(waitSeconds);
+            isWaiting = false;
+        }
+
         public override void Enter()
         {
-            base.Enter();
+            waitSeconds = Random.Range(3f, 8f);
+            Debug.Log($"Idle Enter wait {waitSeconds}");
         }
 
         public override void Exit()
         {
-            base.Exit();
+            Debug.Log($"Idle Exit");
         }
 
-        public override void Update()
+        public override void Update(float deltaTime)
         {
-            base.Update();
+            waitSeconds -= deltaTime;
+            Debug.Log($"Idle Update {waitSeconds}");
+
+            if (waitSeconds <= 0)
+            {
+                Agent.fsm.ChangeState(AIState.Chase);
+            }
         }
     }
 
